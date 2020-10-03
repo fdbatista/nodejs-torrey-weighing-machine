@@ -3,13 +3,15 @@ import LogUtil from '../util/log-util.js'
 
 export default class WeighingMachineHandler {
 
-    constructor(portName, baudRate) {
-        const serialPort = new SerialPort(portName, { baudRate: baudRate })
-        this.serialPort = serialPort
-
+    constructor() {
+        this._initSerialPortHandler()
         this.lastData = ""
-
         this._subscribeToPortEvents()
+    }
+
+    _initSerialPortHandler() {
+        const serialPort = new SerialPort(process.env.COM_PORT, { baudRate: parseInt(process.env.BAUD_RATE) })
+        this.serialPort = serialPort
     }
 
     _subscribeToPortEvents() {
@@ -48,11 +50,15 @@ export default class WeighingMachineHandler {
     }
 
     startReading(secondsInterval) {
-        setInterval(this.sendChar, secondsInterval * 1000)
+        setInterval(this._sendChar, secondsInterval * 1000)
     }
 
     _sendChar() {
-        this.serialPort.write("P\n")
+        try {
+            this.serialPort.write("P\n")
+        } catch (exc) {
+            LogUtil.log(exc.name + ': ' + exc.message)
+        }
     }
 
 }
