@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node app.js"
+    "start": "node -r dotenv/config app.js"
   },
   "dependencies": {
     "@serialport/parser-readline": "^9.0.1",
