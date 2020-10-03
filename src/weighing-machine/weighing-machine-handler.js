@@ -10,7 +10,7 @@ export default class WeighingMachineHandler {
     }
 
     _initSerialPortHandler() {
-        const serialPort = new SerialPort(process.env.COM_PORT, { baudRate: parseInt(process.env.BAUD_RATE) })
+        const serialPort = new SerialPort(process.env.COM_PORT, { baudRate: parseInt(process.env.BAUD_RATE) * 1000 })
         this.serialPort = serialPort
     }
 
