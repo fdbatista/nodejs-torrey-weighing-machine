@@ -9,6 +9,7 @@
   "dependencies": {
     "@serialport/parser-readline": "^9.0.1",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "serialport": "^9.0.1",
     "ws": "^7.3.1"
   }
