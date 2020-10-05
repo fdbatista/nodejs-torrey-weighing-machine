@@ -1,11 +1,10 @@
 import SerialPort from 'serialport'
-import EnvUtil from './env-util.mjs'
 
 export default class PortHandlerUtil {
 
     static build() {
-        let port = EnvUtil.getCompPort()
-        let baudRate = EnvUtil.getBaudRate()
+        let port = process.env.COM_PORT
+        let baudRate = parseInt(process.env.BAUD_RATE)
 
         const serialPort = new SerialPort(port, { baudRate: baudRate })
 
