@@ -1,27 +1,35 @@
 import SerialPort from 'serialport'
 
-export default class PortHandlerFactory {
+export default class PortHandlerUtil {
 
     static build() {
         const serialPort = new SerialPort(process.env.COM_PORT, { baudRate: parseInt(process.env.BAUD_RATE) })
 
         serialPort.on("data", function (data) {
-            console.log("Port data: " + data);
+            log("Data: " + data);
         });
 
         serialPort.on("open", function () {
-            console.log("Port open");
+            log("Port open");
         });
 
         serialPort.on("error", function (error) {
-            console.log(error);
+            log(error);
         });
 
         serialPort.on("close", function () {
-            console.log("Port closed");
+            log("Port closed");
         });
 
         return serialPort;
+    }
+
+    static log(data) {
+        console.log(data)
+    }
+
+    static write(serialPort) {
+        serialPort.write("P\n")
     }
 
 }
