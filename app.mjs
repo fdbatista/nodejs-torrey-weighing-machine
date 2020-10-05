@@ -7,6 +7,4 @@ function write() {
     serialPort.write("P\n")
 }
 
-let readFrequency = EnvUtil.getReadFrequencyInMillis()
-
-setInterval(write, readFrequency);
+setInterval(write, EnvUtil.getReadFrequencyInMillis());
