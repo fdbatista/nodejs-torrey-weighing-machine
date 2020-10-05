@@ -1,6 +1,5 @@
 import SerialPort from 'serialport'
 import LogUtil from '../src/util/log-util.js'
-import MySerialPort from './src/serial-port/serial-port.js'
 
 var lastData = null
 
