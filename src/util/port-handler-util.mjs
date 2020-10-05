@@ -6,19 +6,19 @@ export default class PortHandlerUtil {
         const serialPort = new SerialPort(process.env.COM_PORT, { baudRate: parseInt(process.env.BAUD_RATE) })
 
         serialPort.on("data", function (data) {
-            log("Data: " + data);
+            PortHandlerUtil.log("Data: " + data);
         });
 
         serialPort.on("open", function () {
-            log("Port open");
+            PortHandlerUtil.log("Port open");
         });
 
         serialPort.on("error", function (error) {
-            log(error);
+            PortHandlerUtil.log(error);
         });
 
         serialPort.on("close", function () {
-            log("Port closed");
+            PortHandlerUtil.log("Port closed");
         });
 
         return serialPort;
