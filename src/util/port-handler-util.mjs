@@ -1,31 +1,31 @@
 import SerialPort from 'serialport'
+import EnvUtil from './env-util.mjs'
 
 export default class PortHandlerUtil {
 
     static build() {
-        const serialPort = new SerialPort(process.env.COM_PORT, { baudRate: parseInt(process.env.BAUD_RATE) })
+        let port = EnvUtil.getCompPort()
+        let baudRate = EnvUtil.getBaudRate()
+
+        const serialPort = new SerialPort(port, { baudRate: baudRate })
 
         serialPort.on("data", function (data) {
-            PortHandlerUtil.log("Data: " + data);
+            console.log("Data: " + data);
         });
 
         serialPort.on("open", function () {
-            PortHandlerUtil.log("Port open");
+            console.log("Port open");
         });
 
         serialPort.on("error", function (error) {
-            PortHandlerUtil.log(error);
+            console.log(error);
         });
 
         serialPort.on("close", function () {
-            PortHandlerUtil.log("Port closed");
+            console.log("Port closed");
         });
 
         return serialPort;
-    }
-
-    static log(data) {
-        console.log(data)
     }
 
 }
