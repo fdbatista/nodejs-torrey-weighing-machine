@@ -1,13 +1,10 @@
 import SerialPort from 'serialport'
 import LogUtil from './src/util/log-util.mjs'
+import PortHandlerFactory from './src/factory/PortHandlerFactory'
 
-var lastData = null
+/*var lastData = null
 
 const serialPort = new SerialPort(process.env.COM_PORT, { baudRate: parseInt(process.env.BAUD_RATE) })
-
-function log(data) {
-    console.log(data);
-}
 
 serialPort.on("data", function (data) {
     let strData = data.toString().trim();
@@ -18,7 +15,7 @@ serialPort.on("data", function (data) {
 });
 
 serialPort.on("open", function () {
-    log("Port open");
+    LogUtil.log("Port open");
 });
 
 serialPort.on("error", function (error) {
@@ -26,8 +23,10 @@ serialPort.on("error", function (error) {
 });
 
 serialPort.on("close", function () {
-    log("Port closed");
-});
+    LogUtil.log("Port closed");
+}); */
+
+const serialPort = PortHandlerFactory.build()
 
 function write() {
     serialPort.write("P\n");
