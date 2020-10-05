@@ -1,6 +1,6 @@
 import SerialPort from 'serialport'
 import LogUtil from './src/util/log-util.mjs'
-import PortHandlerFactory from './src/factory/PortHandlerFactory'
+import PortHandlerFactory from './src/factory/port-handler-factory.mjs'
 
 /*var lastData = null
 

@@ -1,3 +1,5 @@
+import SerialPort from 'serialport'
+
 export default class PortHandlerFactory {
 
     static build() {
