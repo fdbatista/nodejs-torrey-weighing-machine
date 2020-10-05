@@ -28,8 +28,4 @@ export default class PortHandlerUtil {
         console.log(data)
     }
 
-    static write(serialPort) {
-        serialPort.write("P\n")
-    }
-
 }

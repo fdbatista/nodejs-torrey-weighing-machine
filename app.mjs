@@ -6,4 +6,4 @@ function write() {
     serialPort.write("P\n")
 }
 
-setInterval(PortHandlerUtil.write(serialPort), 1000);
+setInterval(write, 1000);
