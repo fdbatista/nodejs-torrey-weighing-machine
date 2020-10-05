@@ -3,15 +3,13 @@ import LogUtil from '../src/util/log-util.js'
 
 var lastData = null
 
-const port = new SerialPort('COM3', {
-    baudRate: 115200
-})
+const serialPort = new SerialPort(process.env.COM_PORT, { baudRate: parseInt(process.env.BAUD_RATE) })
 
 function log(data) {
     console.log(data);
 }
 
-port.on("data", function (data) {
+serialPort.on("data", function (data) {
     let strData = data.toString().trim();
     if (strData !== lastData && strData !== "0") {
         LogUtil.log("Port data: " + data);
@@ -19,20 +17,20 @@ port.on("data", function (data) {
     }
 });
 
-port.on("open", function () {
+serialPort.on("open", function () {
     log("Port open");
 });
 
-port.on("error", function (error) {
+serialPort.on("error", function (error) {
     LogUtil.log(error);
 });
 
-port.on("close", function () {
+serialPort.on("close", function () {
     log("Port closed");
 });
 
 function write() {
-    port.write("P\n");
+    serialPort.write("P\n");
 }
 
 setInterval(write, 1000);
