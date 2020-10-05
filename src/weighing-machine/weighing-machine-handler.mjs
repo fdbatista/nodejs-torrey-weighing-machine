@@ -56,6 +56,9 @@ export default class WeighingMachineHandler {
 
     _sendChar() {
         try {
+            if (!this.serialPort) {
+                this.serialPort = new WeighingMachineHandler()
+            }
             this.serialPort.write("P\n")
         } catch (exc) {
             LogUtil.log(exc.name + ': ' + exc.message)
