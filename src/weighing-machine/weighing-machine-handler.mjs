@@ -1,5 +1,5 @@
 import SerialPort from 'serialport'
-import LogUtil from '../util/log-util.js'
+import LogUtil from '../util/log-util.mjs'
 
 export default class WeighingMachineHandler {
 
