@@ -4,12 +4,11 @@ export default class PortHandlerUtil {
 
     static build() {
 
-        SerialPort.list().then((ports) => {
-            console.log(ports)
-        })
+        let port = PortHandlerUtil.getActivePort()
 
-
-        let port = process.env.COM_PORT
+        if (!port) {
+            throw "ALERT: No valid port detected."
+        }
         let baudRate = parseInt(process.env.BAUD_RATE)
 
         const serialPort = new SerialPort(port, { baudRate: baudRate })
@@ -33,10 +32,27 @@ export default class PortHandlerUtil {
         return serialPort;
     }
 
-    static getPorts(serialPort) {
-        serialPort.list().then(function (data) {
-            console.log(data);
-        });
+    static getActivePort() {
+        PortHandlerUtil.getAvailablePorts().then((ports) => {
+            let devManufacturer = process.env.DEVICE_MANUFACTURER
+            let devSerialNumber = process.env.DEVICE_SERIAL_NUMBER
+            let port = ports.filter(port => port.manufacturer === devManufacturer && port.serialNumber === devSerialNumber)
+
+            return port
+        })
+    }
+
+    static getAvailablePorts() {
+        return new Promise(function (resolve, reject) {
+            return SerialPort.list().then((ports) => {
+                let availablePorts = ports.filter(port => port.manufacturer && port.serialNumber)
+                resolve(availablePorts)
+            })
+        })
+    }
+
+    static write(serialPort) {
+        serialPort.write("P\n")
     }
 
 }
