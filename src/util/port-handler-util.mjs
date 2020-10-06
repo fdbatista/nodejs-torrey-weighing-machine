@@ -3,6 +3,14 @@ import SerialPort from 'serialport'
 export default class PortHandlerUtil {
 
     static build() {
+
+        SerialPort.list((err, ports) => {
+            ports.forEach((port) => {
+                console.log(port)
+            })
+        })
+
+
         let port = process.env.COM_PORT
         let baudRate = parseInt(process.env.BAUD_RATE)
 
@@ -25,6 +33,12 @@ export default class PortHandlerUtil {
         });
 
         return serialPort;
+    }
+
+    static getPorts(serialPort) {
+        serialPort.list().then(function (data) {
+            console.log(data);
+        });
     }
 
 }
