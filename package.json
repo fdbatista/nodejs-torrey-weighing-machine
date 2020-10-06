@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node -r dotenv/config --experimental-modules src/app/port-reader.mjs",
-    "get": "node -r dotenv/config --experimental-modules src/app/port-getter.mjs"
+    "list": "node -r dotenv/config --experimental-modules src/app/port-getter.mjs",
+    "start": "node -r dotenv/config --experimental-modules src/app/port-reader.mjs"
   },
   "dependencies": {
     "@serialport/parser-readline": "^9.0.1",
