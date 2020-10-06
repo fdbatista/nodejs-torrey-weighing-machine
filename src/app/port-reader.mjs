@@ -12,14 +12,3 @@ try {
 } catch (error) {
     console.log(error)
 }
-
-
-/*
-PortHandlerUtil.build().then((serialPort) => {
-
-    function write() {
-        serialPort.write("P\n")
-    }
-
-    setInterval(write, EnvUtil.getReadFrequencyInMillis());
-}) */
