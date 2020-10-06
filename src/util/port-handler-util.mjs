@@ -36,6 +36,11 @@ export default class PortHandlerUtil {
         PortHandlerUtil.getAvailablePorts().then((ports) => {
             let devManufacturer = process.env.DEVICE_MANUFACTURER
             let devSerialNumber = process.env.DEVICE_SERIAL_NUMBER
+
+            console.log(ports)
+            console.log(devManufacturer)
+            console.log(devSerialNumber)
+
             let port = ports.filter(port => port.manufacturer === devManufacturer && port.serialNumber === devSerialNumber)
 
             return port
