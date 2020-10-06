@@ -1,8 +1,10 @@
 import SerialPort from 'serialport'
+import AxiosUtil from './axios-util.mjs'
 
 export default class PortHandlerUtil {
 
     static build() {
+
         return new Promise(function (resolve, reject) {
             PortHandlerUtil.getActivePort().then((port) => {
                 if (!port) {
@@ -15,6 +17,7 @@ export default class PortHandlerUtil {
     
                 serialPort.on("data", function (data) {
                     console.log("Data: " + data)
+                    AxiosUtil.post(data)
                 });
     
                 serialPort.on("open", function () {
