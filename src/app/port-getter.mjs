@@ -1,8 +1,15 @@
 import PortHandlerUtil from '../util/port-handler-util.mjs'
 
 PortHandlerUtil.getAvailablePorts().then((ports) => {
-    console.log(ports.length > 0 ? ports : "ALERT: No available ports.")
+    if (ports.length > 0)
+        console.log("Available ports:\n", ports)
+    else
+        console.log("ALERT: No available ports.")
     
     let activePort = PortHandlerUtil.getActivePort()
-    console.log(activePort ? activePort : "ALERT: No connected device.")
+    
+    if (activePort)
+        console.log("Active port:\n", activePort)
+    else
+        console.log("ALERT: No connected device.")
 })
