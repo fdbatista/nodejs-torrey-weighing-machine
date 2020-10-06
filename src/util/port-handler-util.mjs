@@ -4,10 +4,8 @@ export default class PortHandlerUtil {
 
     static build() {
 
-        SerialPort.list((err, ports) => {
-            ports.forEach((port) => {
-                console.log(port)
-            })
+        SerialPort.list().then((ports) => {
+            console.log(ports)
         })
 
 
