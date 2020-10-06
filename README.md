@@ -6,9 +6,9 @@ Simple NodeJS-powered application for reading weight from Torrey's digital weigh
 - CD into the folder (cd `nodejs-torrey-weighing-machine`).
 - Install dependencies (`npm install`).
 - Rename the `.env.example` file to `.env`.
-- Edit the `.env` file and update the serial port name your weighing machine is connected to (`COM_PORT`) and the baudRate it works on (`BAUD_RATE`).
-- The `READ_INTERVAL_SECONDS` variable will control how often you want to read the port data.
+- Edit the `.env` file and update the variables `VENDOR_ID`, `PRODUCT_ID` and `BAUD_RATE` according to your device specifications. Executing `npm run list` will give you the list of devices attached to serial ports on your local machine. You can take `VENDOR_ID` and `PRODUCT_ID` from there. `BAUD_RATE` should be specified in your device's technical documentation.
+- The `READ_INTERVAL_SECONDS` variable defines how many seconds you want to wait between one reading job and the next one.
 - In case you need to submit the weight to a remote API, you will have to update also the `ENDPOINT_URL` and the `API_KEY` to communicate with the server (this is still WIP).
-- Run the application (`npm start`).
+- Run the application (`npm run start`).
 
 Happy coding :)
