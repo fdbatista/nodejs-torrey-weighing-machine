@@ -8,6 +8,7 @@ export default class PortHandlerUtil {
                 if (!port) {
                     throw "ALERT: No valid port detected."
                 }
+                
                 let baudRate = parseInt(process.env.BAUD_RATE)
     
                 const serialPort = new SerialPort(port.path, { baudRate: baudRate })
