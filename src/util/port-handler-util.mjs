@@ -46,13 +46,10 @@ export default class PortHandlerUtil {
         return new Promise(function (resolve, reject) {
             return SerialPort.list().then((ports) => {
                 let availablePorts = ports.filter(port => port.manufacturer && port.serialNumber)
+                
                 resolve(availablePorts)
             })
         })
-    }
-
-    static write(serialPort) {
-        serialPort.write("P\n")
     }
 
 }
