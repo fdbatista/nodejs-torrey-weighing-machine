@@ -34,10 +34,10 @@ export default class PortHandlerUtil {
 
     static getActivePort() {
         return new Promise(function (resolve, reject) {
-            PortHandlerUtil.getAvailablePorts().then((ports) => {
+            return SerialPort.list().then((ports) => {
                 let devManufacturer = process.env.DEVICE_MANUFACTURER
                 let devSerialNumber = process.env.DEVICE_SERIAL_NUMBER
-                let port = ports.filter(port => port.manufacturer === devManufacturer && port.serialNumber === devSerialNumber)
+                let port = ports.find(port => port.manufacturer === devManufacturer && port.serialNumber === devSerialNumber)
 
                 resolve(port)
             })
