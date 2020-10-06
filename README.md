@@ -3,7 +3,7 @@ Simple NodeJS-powered application for reading weight from Torrey's digital weigh
 
 ### Setup
 - Open a terminal and clone the repository (`git clone https://github.com/fdbatista/nodejs-torrey-weighing-machine`).
-- CD into the folder (cd `nodejs-torrey-weighing-machine`).
+- Go into the folder (cd `nodejs-torrey-weighing-machine`).
 - Install dependencies (`npm install`).
 - Rename the `.env.example` file to `.env`.
 - Edit the `.env` file and update the variables `VENDOR_ID`, `PRODUCT_ID` and `BAUD_RATE` according to your device specifications. Executing `npm run list` will give you the list of devices attached to serial ports on your local machine. You can take `VENDOR_ID` and `PRODUCT_ID` from there. `BAUD_RATE` should be specified in your device's technical documentation.
