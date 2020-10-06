@@ -8,7 +8,7 @@ export default class PortHandlerUtil {
                 if (!port) {
                     throw "ALERT: No valid port detected."
                 }
-                
+
                 let baudRate = parseInt(process.env.BAUD_RATE)
     
                 const serialPort = new SerialPort(port.path, { baudRate: baudRate })
@@ -38,9 +38,9 @@ export default class PortHandlerUtil {
     static getActivePort() {
         return new Promise(function (resolve, reject) {
             return SerialPort.list().then((ports) => {
-                let devManufacturer = process.env.DEVICE_MANUFACTURER
-                let devSerialNumber = process.env.DEVICE_SERIAL_NUMBER
-                let port = ports.find(port => port.manufacturer === devManufacturer && port.serialNumber === devSerialNumber)
+                let vendorId = process.env.VENDOR_ID
+                let productId = process.env.PRODUCT_ID
+                let port = ports.find(port => port.vendorId === vendorId && port.productId === productId)
 
                 resolve(port)
             })
@@ -50,7 +50,7 @@ export default class PortHandlerUtil {
     static getAvailablePorts() {
         return new Promise(function (resolve, reject) {
             return SerialPort.list().then((ports) => {
-                let availablePorts = ports.filter(port => port.manufacturer && port.serialNumber)
+                let availablePorts = ports.filter(port => port.vendorId && port.productId)
 
                 resolve(availablePorts)
             })
