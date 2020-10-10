@@ -4,12 +4,12 @@ export default class AxiosUtil {
 
     static post(data) {
         let url = process.env.POST_ENDPOINT
-        let jwt = process.env.JWT
+        let secretKey = process.env.API_KEY
 
         axios
             .post(url, {
-                jwt: jwt,
-                data: data
+                api_key: secretKey,
+                weight: data
             })
             .then(res => {
                 console.log(`Result: ${res.statusText}`)
