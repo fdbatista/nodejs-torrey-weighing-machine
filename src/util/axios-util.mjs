@@ -3,7 +3,7 @@ import axios from 'axios'
 export default class AxiosUtil {
 
     static post(data) {
-        let url = process.env.POST_ENDPOINT
+        let url = process.env.ENDPOINT_URL
         let secretKey = process.env.API_KEY
 
         axios
