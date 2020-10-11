@@ -15,7 +15,7 @@ export default class AxiosUtil {
                 console.log(`Result: ${res.statusText}`)
             })
             .catch(error => {
-                console.error(error)
+                console.error(error.code)
             })
     }
 
