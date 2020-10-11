@@ -1,3 +1,9 @@
 import AxiosUtil from '../util/axios-util.mjs'
 
-AxiosUtil.post('0.459')
+function sendRequest() {
+    let randomValue = Math.random().toFixed(3);
+    
+    AxiosUtil.post(randomValue)
+}
+
+setInterval(sendRequest, 3000);
