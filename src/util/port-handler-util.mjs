@@ -1,5 +1,6 @@
 import SerialPort from 'serialport'
 import AxiosUtil from './axios-util.mjs'
+import ParserUtil from './parser-util.mjs'
 
 export default class PortHandlerUtil {
 
@@ -16,19 +17,13 @@ export default class PortHandlerUtil {
                 const serialPort = new SerialPort(port.path, { baudRate: baudRate })
 
                 serialPort.on("data", function (data) {
-                    let stringData = String(data);
-                    console.log("Data: " + stringData)
-                    
-                    try {
-                        let dataNormalized = stringData.replace(' kg', '')
-                        let floatValue = parseFloat(dataNormalized)
-                        if (floatValue > 0) {
-                            AxiosUtil.post(floatValue)
-                        }
-                    } catch(exc) {
-                        console.log(exc)
+                    let machineWeight = ParserUtil.machineReadingToFloat(data)
+
+                    if (floatValue > 0) {
+                        console.log("Data: " + machineWeight)
+                        AxiosUtil.post(machineWeight)
                     }
-                    
+
                 });
 
                 serialPort.on("open", function () {

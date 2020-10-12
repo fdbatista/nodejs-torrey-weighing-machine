@@ -12,7 +12,7 @@ export default class AxiosUtil {
                 console.log(res.data)
             })
             .catch(error => {
-                console.error(error.code)
+                console.error(error)
             })
     }
 
