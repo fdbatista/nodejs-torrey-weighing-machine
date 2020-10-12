@@ -18,7 +18,7 @@ export default class PortHandlerUtil {
                 serialPort.on("data", function (data) {
                     console.log("Data: " + data)
                     try {
-                        let dataNormalized = data.replace(' kg', '')
+                        let dataNormalized = String(data).replace(' kg', '')
                         let floatValue = parseFloat(dataNormalized)
                         if (floatValue > 0) {
                             AxiosUtil.post(data)
