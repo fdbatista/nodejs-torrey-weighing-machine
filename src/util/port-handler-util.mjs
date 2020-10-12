@@ -16,12 +16,14 @@ export default class PortHandlerUtil {
                 const serialPort = new SerialPort(port.path, { baudRate: baudRate })
 
                 serialPort.on("data", function (data) {
-                    console.log("Data: " + data)
+                    let stringData = String(data);
+                    console.log("Data: " + stringData)
+                    
                     try {
-                        let dataNormalized = String(data).replace(' kg', '')
+                        let dataNormalized = stringData.replace(' kg', '')
                         let floatValue = parseFloat(dataNormalized)
                         if (floatValue > 0) {
-                            AxiosUtil.post(data)
+                            AxiosUtil.post(floatValue)
                         }
                     } catch(exc) {
                         console.log(exc)
