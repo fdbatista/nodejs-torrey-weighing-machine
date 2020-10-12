@@ -24,7 +24,7 @@ export default class PortHandlerUtil {
                             AxiosUtil.post(data)
                         }
                     } catch(exc) {
-                        
+                        console.log(exc)
                     }
                     
                 });
