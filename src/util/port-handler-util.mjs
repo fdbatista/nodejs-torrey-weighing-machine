@@ -19,7 +19,7 @@ export default class PortHandlerUtil {
                 serialPort.on("data", function (data) {
                     let machineWeight = ParserUtil.machineReadingToFloat(data)
 
-                    if (floatValue > 0) {
+                    if (machineWeight > 0) {
                         console.log("Data: " + machineWeight)
                         AxiosUtil.post(machineWeight)
                     }
