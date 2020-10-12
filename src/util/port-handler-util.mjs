@@ -12,34 +12,39 @@ export default class PortHandlerUtil {
                 }
 
                 let baudRate = parseInt(process.env.BAUD_RATE)
-    
+
                 const serialPort = new SerialPort(port.path, { baudRate: baudRate })
-    
+
                 serialPort.on("data", function (data) {
                     console.log("Data: " + data)
-                    let dataNormalized = data.replace(' kg', '')
-                    let floatValue = parseFloat(dataNormalized)
-                    if (floatValue > 0) {
-                        AxiosUtil.post(data)
+                    try {
+                        let dataNormalized = data.replace(' kg', '')
+                        let floatValue = parseFloat(dataNormalized)
+                        if (floatValue > 0) {
+                            AxiosUtil.post(data)
+                        }
+                    } catch(exc) {
+                        
                     }
+                    
                 });
-    
+
                 serialPort.on("open", function () {
                     console.log("Port open")
                 });
-    
+
                 serialPort.on("error", function (error) {
                     console.log(error)
                 });
-    
+
                 serialPort.on("close", function () {
                     console.log("Port closed")
                 });
-    
+
                 resolve(serialPort)
             })
         })
-        
+
     }
 
     static getActivePort() {
