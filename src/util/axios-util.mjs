@@ -3,16 +3,13 @@ import axios from 'axios'
 export default class AxiosUtil {
 
     static post(data) {
-        let url = process.env.ENDPOINT_URL
-        let secretKey = process.env.API_KEY
+        let apiKey = process.env.API_KEY
+        let url = process.env.ENDPOINT_URL += `?api_key=${apiKey}&weight=${data}`
 
         axios
-            .post(url, {
-                api_key: secretKey,
-                weight: data
-            })
+            .post(url)
             .then(res => {
-                console.log(`Result: ${res.statusText}`)
+                console.log(res.data)
             })
             .catch(error => {
                 console.error(error.code)
