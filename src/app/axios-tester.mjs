@@ -1,4 +1,5 @@
 import AxiosUtil from '../util/axios-util.mjs'
+import EnvUtil from '../util/env-util.mjs'
 
 function sendRequest() {
     let randomValue = Math.random().toFixed(3);
@@ -6,4 +7,4 @@ function sendRequest() {
     AxiosUtil.post(randomValue)
 }
 
-setInterval(sendRequest, 3000);
+setInterval(sendRequest, EnvUtil.getReadFrequencyInMillis());

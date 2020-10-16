@@ -1,7 +1,9 @@
 export default class EnvUtil {
 
     static getReadFrequencyInMillis() {
-        return parseInt(process.env.READ_INTERVAL_SECONDS) * 1000
+        let seconds = parseFloat(process.env.READ_INTERVAL_SECONDS)
+        
+        return seconds * 1000
     }
 
 }
