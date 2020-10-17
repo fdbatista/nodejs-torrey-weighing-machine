@@ -3,15 +3,14 @@ import axios from 'axios'
 export default class AxiosUtil {
 
     static sendingData = false
-    static endpointUrl = process.env.ENDPOINT_URL
-    static apiKey = process.env.API_KEY
+    static endpointUrl = `${process.env.ENDPOINT_URL}?api_key=${process.env.API_KEY}`
     static lastValue = 0.0
 
     static post(data) {
         if (!this.sendingData && data != this.lastValue) {
             this.lastValue = data
             this.sendingData = true
-            let url = `${this.endpointUrl}?api_key=${this.apiKey}&weight=${data}`
+            let url = `${this.endpointUrl}&weight=${data}`
 
             axios
                 .post(url)
