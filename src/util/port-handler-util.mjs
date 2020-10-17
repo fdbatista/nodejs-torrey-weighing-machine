@@ -20,7 +20,6 @@ export default class PortHandlerUtil {
                     let machineWeight = ParserUtil.machineReadingToFloat(data)
 
                     if (machineWeight > 0) {
-                        console.log("Data: " + machineWeight)
                         AxiosUtil.post(machineWeight)
                     }
 
