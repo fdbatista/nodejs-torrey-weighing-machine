@@ -8,15 +8,13 @@ export default class AxiosUtil {
     static lastValue = 0.0
 
     static post(data) {
-
-        
         if (!this.sendingData && data != this.lastValue) {
             this.lastValue = data
             this.sendingData = true
-            let url = this.endpointUrl + `?api_key=${this.apiKey}&weight=${data}`
-            
+            let url = `${this.endpointUrl}?api_key=${this.apiKey}&weight=${data}`
+
             axios
-                .get(url)
+                .post(url)
                 .then(res => {
                     console.log(res.data)
                     this.sendingData = false
