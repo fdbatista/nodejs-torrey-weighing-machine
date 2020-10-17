@@ -14,14 +14,16 @@ export default class PortHandlerUtil {
 
                 let baudRate = parseInt(process.env.BAUD_RATE)
 
-                const serialPort = new SerialPort(port.path, { baudRate: baudRate })
+                const serialPort = new SerialPort(port.path, {
+                    baudRate: baudRate,
+                    parser: new Readline("\r\n")
+                })
 
-                serialPort.on("data", function (data) {
+                serialPort.parser.on("data", function (data) {
                     let machineWeight = ParserUtil.machineReadingToFloat(data)
-                    
-                    console.log("Raw data: ",  data)
-                    console.log("Parsed weight: ",  machineWeight)
-                    
+
+                    console.log("Parsed weight: ", machineWeight)
+
                     if (machineWeight > 0) {
                         AxiosUtil.post(machineWeight)
                     }
