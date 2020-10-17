@@ -5,7 +5,12 @@ import Readline from '@serialport/parser-readline'
 
 export default class PortHandlerUtil {
 
+    static baudRate = parseInt(process.env.BAUD_RATE)
+
+
     static build() {
+
+        let that = this
 
         return new Promise(function (resolve, reject) {
             PortHandlerUtil.getActivePort().then((port) => {
@@ -13,10 +18,8 @@ export default class PortHandlerUtil {
                     throw "ALERT: No valid port detected."
                 }
 
-                let baudRate = parseInt(process.env.BAUD_RATE)
-
                 const serialPort = new SerialPort(port.path, {
-                    baudRate: baudRate
+                    baudRate: that.baudRate
                 })
 
                 const parser = serialPort.pipe(new Readline({ delimiter: ' kg' }))
@@ -31,17 +34,6 @@ export default class PortHandlerUtil {
                     }
 
                 });
-
-                /* serialPort.on("data", function (data) {
-                    let machineWeight = ParserUtil.machineReadingToFloat(data)
-
-                    console.log("Parsed weight: ", machineWeight)
-
-                    if (machineWeight > 0) {
-                        AxiosUtil.post(machineWeight)
-                    }
-
-                }); */
 
                 serialPort.on("open", function () {
                     console.log("Port open")

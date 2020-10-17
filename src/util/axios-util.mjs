@@ -7,9 +7,6 @@ export default class AxiosUtil {
     static lastValue = 0.0
 
     static post(data) {
-
-        console.log("Data to send: ", data)
-
         if (!this.sendingData && data != this.lastValue) {
             this.lastValue = data
             this.sendingData = true
