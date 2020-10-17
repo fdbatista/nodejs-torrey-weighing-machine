@@ -6,6 +6,7 @@ import Readline from '@serialport/parser-readline'
 export default class PortHandlerUtil {
 
     static baudRate = parseInt(process.env.BAUD_RATE)
+    static lineDelimiter = ' kg'
 
     static build() {
 
@@ -21,12 +22,14 @@ export default class PortHandlerUtil {
                     baudRate: that.baudRate
                 })
 
-                const parser = serialPort.pipe(new Readline({ delimiter: ' kg' }))
-                
+                const parser = serialPort.pipe(
+                    new Readline({
+                        delimiter: that.lineDelimiter
+                    })
+                )
+
                 parser.on("data", function (data) {
                     let machineWeight = ParserUtil.machineReadingToFloat(data)
-
-                    console.log("Parsed weight: ", machineWeight)
 
                     if (machineWeight > 0) {
                         AxiosUtil.post(machineWeight)
