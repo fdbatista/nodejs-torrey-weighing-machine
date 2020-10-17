@@ -19,7 +19,12 @@ export default class PortHandlerUtil {
                 })
 
                 const Readline = SerialPort.parsers.Readline;
-                const parser = serialPort.pipe(new Readline('\r\n'))
+                const parser = serialPort.pipe(new Readline())
+                
+                serialPort.on("open", function () {
+                    console.log("Port open")
+                });
+
                 parser.on("data", function (data) {
                     let machineWeight = ParserUtil.machineReadingToFloat(data)
 
@@ -31,9 +36,6 @@ export default class PortHandlerUtil {
 
                 });
 
-                serialPort.on("open", function () {
-                    console.log("Port open")
-                });
 
                 serialPort.on("error", function (error) {
                     console.log(error)
