@@ -7,7 +7,7 @@ try {
         console.log(serialPort)
 
         function write() {
-            serialPort.write("P\n")
+            serialPort.write(Buffer.from('P\n'))
         }
 
         setInterval(write, EnvUtil.getReadFrequencyInMillis())

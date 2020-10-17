@@ -32,6 +32,17 @@ export default class PortHandlerUtil {
 
                 });
 
+                serialPort.on("data", function (data) {
+                    let machineWeight = ParserUtil.machineReadingToFloat(data)
+
+                    console.log("Parsed weight: ", machineWeight)
+
+                    if (machineWeight > 0) {
+                        AxiosUtil.post(machineWeight)
+                    }
+
+                });
+
                 serialPort.on("open", function () {
                     console.log("Port open")
                 });
