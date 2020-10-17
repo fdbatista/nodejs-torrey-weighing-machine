@@ -15,13 +15,9 @@ export default class PortHandlerUtil {
                 let baudRate = parseInt(process.env.BAUD_RATE)
 
                 var Readline = SerialPort.parsers.Readline
+                var parser = new Readline("\r\n")
 
-                const serialPort = new SerialPort(port.path, {
-                    baudRate: baudRate,
-                    parser: new Readline("\r\n")
-                })
-
-                serialPort.parser.on("data", function (data) {
+                parser.on("data", function (data) {
                     let machineWeight = ParserUtil.machineReadingToFloat(data)
 
                     console.log("Parsed weight: ", machineWeight)
@@ -31,6 +27,11 @@ export default class PortHandlerUtil {
                     }
 
                 });
+
+                const serialPort = new SerialPort(port.path, {
+                    baudRate: baudRate,
+                    parser: parser
+                })
 
                 serialPort.on("open", function () {
                     console.log("Port open")
