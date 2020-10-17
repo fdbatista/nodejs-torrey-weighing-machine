@@ -7,7 +7,6 @@ export default class PortHandlerUtil {
 
     static baudRate = parseInt(process.env.BAUD_RATE)
 
-
     static build() {
 
         let that = this
