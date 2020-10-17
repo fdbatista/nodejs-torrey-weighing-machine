@@ -8,7 +8,7 @@ Simple NodeJS-powered application for reading weight from Torrey's digital weigh
 - Rename the `.env.example` file to `.env`.
 - Edit the `.env` file and update the variables `VENDOR_ID`, `PRODUCT_ID` and `BAUD_RATE` according to your device specifications. Executing `npm run list` will give you the list of devices attached to serial ports on your local machine. You can take `VENDOR_ID` and `PRODUCT_ID` from there. `BAUD_RATE` should be specified in your device's technical documentation.
 - The `READ_INTERVAL_SECONDS` variable defines how many seconds you want to wait between one reading job and the next one.
-- In case you need to submit the weight to a remote API, you will have to update also the `ENDPOINT_URL` and the `API_KEY` to communicate with the server (this is still WIP).
-- Run the application (`npm run start`).
+- The `ENDPOINT_URL` and the `API_KEY` specify the parameters to communicate with the backend application receiving the readings.
+- Run the application (`npm run start`) or make a test to verify the endpoint (`npm run test-axios`).
 
 Happy coding :)
