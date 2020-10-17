@@ -18,8 +18,8 @@ export default class PortHandlerUtil {
                     baudRate: baudRate,
                     parser: new SerialPort.parsers.Readline('\r\n')
                 })
-                
-                serialPort.parser.on("data", function (data) {
+
+                serialPort.on("data", function (data) {
                     let machineWeight = ParserUtil.machineReadingToFloat(data)
 
                     console.log("Parsed weight: ", machineWeight)
