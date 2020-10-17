@@ -1,6 +1,7 @@
 import SerialPort from 'serialport'
 import AxiosUtil from './axios-util.mjs'
 import ParserUtil from './parser-util.mjs'
+import Readline from '@serialport/parser-readline'
 
 export default class PortHandlerUtil {
 
@@ -18,13 +19,8 @@ export default class PortHandlerUtil {
                     baudRate: baudRate
                 })
 
-                const Readline = SerialPort.parsers.Readline;
-                const parser = serialPort.pipe(new Readline())
+                const parser = serialPort.pipe(new Readline({ delimiter: '\r\n' }))
                 
-                serialPort.on("open", function () {
-                    console.log("Port open")
-                });
-
                 parser.on("data", function (data) {
                     let machineWeight = ParserUtil.machineReadingToFloat(data)
 
@@ -36,6 +32,9 @@ export default class PortHandlerUtil {
 
                 });
 
+                serialPort.on("open", function () {
+                    console.log("Port open")
+                });
 
                 serialPort.on("error", function (error) {
                     console.log(error)
