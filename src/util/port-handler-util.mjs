@@ -14,9 +14,11 @@ export default class PortHandlerUtil {
 
                 let baudRate = parseInt(process.env.BAUD_RATE)
 
+                var Readline = SerialPort.parsers.Readline
+
                 const serialPort = new SerialPort(port.path, {
                     baudRate: baudRate,
-                    parser: SerialPort.parsers.readline("\r\n")
+                    parser: new Readline("\r\n")
                 })
 
                 serialPort.parser.on("data", function (data) {
